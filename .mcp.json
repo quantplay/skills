@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "quantplay": {
+      "url": "https://mcp.quantplay.tech/mcp/readonly"
+    }
+  }
+}

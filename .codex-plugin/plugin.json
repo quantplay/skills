@@ -28,7 +28,7 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Quantplay",
-    "shortDescription": "Talk to your Indian broker accounts",
+    "shortDescription": "Your Indian broker accounts",
     "longDescription": "Quantplay connects your agent to your broker accounts across 10+ Indian brokers, including Zerodha, Upstox, Angel One, Kotak and Finvasia, through one sign-in. Ask about positions, holdings, open orders, margins, daily and historical P&L, option chains and live market data in plain English. This listing is read-only: it cannot place, modify or cancel orders. You approve each agent in Quantplay and can disconnect it any time.",
     "developerName": "Quantplay",
     "category": "Finance",
@@ -44,6 +44,70 @@
     ],
     "brandColor": "#4f8bff",
     "composerIcon": "./assets/icon.png",
-    "logo": "./assets/icon.png"
+    "logo": "./assets/icon.png",
+    "supportURL": "https://www.quantplay.tech/policies/support",
+    "privacyPolicyURL": "https://www.quantplay.tech/policies/privacy",
+    "termsOfServiceURL": "https://www.quantplay.tech/policies/terms"
+  },
+  "extensions": {
+    "com.openai": {
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Today's P&L across accounts",
+              "prompt": "What's my P&L today across all my accounts?",
+              "tools_triggered": "get_accounts, get_live_pnl",
+              "expected_behavior": "Lists each linked broker account by nickname with today's P&L in INR and a total, quoting only values returned by the tools."
+            },
+            {
+              "description": "Open positions",
+              "prompt": "Show my open positions on my main account.",
+              "tools_triggered": "get_accounts, get_positions",
+              "expected_behavior": "Returns the open positions for the named account with quantity, average price, LTP and P&L per instrument."
+            },
+            {
+              "description": "Holdings review",
+              "prompt": "Analyse my holdings. Anything I should worry about?",
+              "tools_triggered": "get_accounts, get_holdings",
+              "expected_behavior": "Summarises holdings, flags concentration above roughly 25% and large drawdowns from average price, without recommending trades."
+            },
+            {
+              "description": "Margin check",
+              "prompt": "How much margin do I have free on each account?",
+              "tools_triggered": "get_accounts, get_margins",
+              "expected_behavior": "Reports available and used margin per account in INR."
+            },
+            {
+              "description": "Option chain",
+              "prompt": "Show the NIFTY option chain for the nearest expiry around the ATM strike.",
+              "tools_triggered": "get_expiry_date_list, get_option_chain",
+              "expected_behavior": "Finds the nearest NIFTY expiry and shows calls and puts with LTP and open interest for strikes around the ATM strike."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Order placement is out of scope",
+              "prompt": "Buy 1 lot of NIFTY 24300 CE on my main account."
+            },
+            {
+              "description": "Changing risk limits is out of scope",
+              "prompt": "Remove the stoploss on my main account."
+            },
+            {
+              "description": "Moving money is not supported",
+              "prompt": "Withdraw 50,000 rupees from my broker account to my bank."
+            }
+          ]
+        },
+        "demo_recording_url": "https://cdn.quantplay.tech/main/home/videos/analyse-my-holdings-16x9.mp4"
+      },
+      "publication": {
+        "countries": [
+          "IN"
+        ],
+        "release_notes": "Initial release: read-only access to positions, holdings, orders, margins, P&L, option chains and market data across 10+ Indian brokers, with OAuth sign-in."
+      }
+    }
   }
 }
