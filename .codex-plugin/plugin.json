@@ -1,0 +1,49 @@
+{
+  "name": "quantplay",
+  "version": "0.1.0",
+  "description": "Read your Indian broker accounts in plain English: positions, holdings, orders, margins, P&L, option chains and market data, across 10+ brokers from one connection.",
+  "author": {
+    "name": "Quantplay",
+    "email": "hello@quantplay.tech",
+    "url": "https://quantplay.tech"
+  },
+  "homepage": "https://quantplay.tech/mcp",
+  "repository": "https://github.com/quantplay/skills",
+  "license": "MIT",
+  "keywords": [
+    "quantplay",
+    "portfolio",
+    "broker",
+    "zerodha",
+    "upstox",
+    "angel-one",
+    "kotak",
+    "options",
+    "option-chain",
+    "pnl",
+    "nse",
+    "bse",
+    "india"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Quantplay",
+    "shortDescription": "Talk to your Indian broker accounts",
+    "longDescription": "Quantplay connects your agent to your broker accounts across 10+ Indian brokers, including Zerodha, Upstox, Angel One, Kotak and Finvasia, through one sign-in. Ask about positions, holdings, open orders, margins, daily and historical P&L, option chains and live market data in plain English. This listing is read-only: it cannot place, modify or cancel orders. You approve each agent in Quantplay and can disconnect it any time.",
+    "developerName": "Quantplay",
+    "category": "Finance",
+    "capabilities": [
+      "Read"
+    ],
+    "websiteURL": "https://quantplay.tech",
+    "defaultPrompt": [
+      "What's my P&L today across all my accounts?",
+      "Which of my holdings are down more than 15% and how much would averaging down cost?",
+      "Show my open option positions and what strategy each one is",
+      "How much margin do I have free on each account?"
+    ],
+    "brandColor": "#4f8bff",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
+  }
+}
