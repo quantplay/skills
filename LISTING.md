@@ -31,7 +31,7 @@ and the ChatGPT plugin submission. Limits are the portal's; character counts are
 > change risk limits. You sign in to Quantplay and approve Claude on a consent screen, and you can
 > disconnect it at any time in Quantplay → Settings → AI Integration.
 >
-> Requires a Quantplay account (free plan available) with at least one broker account linked.
+> Requires a Quantplay account (7-day free trial) with at least one broker account linked.
 
 **Categories:** Finance · Productivity
 
@@ -49,7 +49,7 @@ and the ChatGPT plugin submission. Limits are the portal's; character counts are
 - Margin checks before the user trades in their broker app.
 
 **What users need before connecting:** a Quantplay account and at least one broker account linked
-in Quantplay. Free plan available.
+in Quantplay. 7-day free trial.
 
 **Reads or writes:** reads only.
 
