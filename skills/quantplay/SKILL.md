@@ -49,5 +49,5 @@ connector (`https://mcp.quantplay.tech/mcp`) added as a custom connector, with t
 ## Risk limits
 
 Each broker account can have a stoploss, target and kill switch set in Quantplay. They are
-account-level and Quantplay auto-exits positions when one is breached. You can read them
-but this listing can't change them.
+account-level and Quantplay auto-exits positions when one is breached. `get_accounts`
+returns each account's `stoploss`, `target` and `rms_settings`; this listing can't change them.
