@@ -51,3 +51,23 @@ test("no secrets or overclaims in a public repo", () => {
     for (const [re, why] of banned) assert.ok(!re.test(text), `${f}: ${why}`);
   }
 });
+
+test("the Codex manifest declares its bundled read-only MCP connection", () => {
+  const manifest = json(".codex-plugin/plugin.json");
+  assert.equal(manifest.mcpServers, "./.mcp.json");
+  const config = json(manifest.mcpServers);
+  assert.deepEqual(Object.keys(config.mcpServers), ["quantplay"]);
+  assert.equal(config.mcpServers.quantplay.url, READONLY);
+  assert.deepEqual(Object.keys(config.mcpServers.quantplay), ["url"]);
+});
+
+test("starter prompts satisfy public directory limits", () => {
+  const prompts = json(".codex-plugin/plugin.json").interface.defaultPrompt;
+  assert.ok(Array.isArray(prompts));
+  assert.ok(prompts.length >= 1 && prompts.length <= 3, "Public listings allow at most three starter prompts");
+  assert.equal(new Set(prompts.map((p) => p.trim().replace(/\s+/g, " "))).size, prompts.length);
+  for (const prompt of prompts) {
+    assert.ok(typeof prompt === "string" && prompt.trim().length > 0 && prompt.length <= 128);
+    assert.ok(!/[\r\n]/.test(prompt));
+  }
+});

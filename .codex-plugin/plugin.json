@@ -26,6 +26,7 @@
     "india"
   ],
   "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Quantplay",
     "shortDescription": "Your Indian broker accounts",
@@ -39,8 +40,7 @@
     "defaultPrompt": [
       "What's my P&L today across all my accounts?",
       "Which of my holdings are down more than 15% and how much would averaging down cost?",
-      "Show my open option positions and what strategy each one is",
-      "How much margin do I have free on each account?"
+      "Show my open option positions and what strategy each one is"
     ],
     "brandColor": "#4f8bff",
     "composerIcon": "./assets/icon.png",
