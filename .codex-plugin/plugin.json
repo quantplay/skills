@@ -1,13 +1,13 @@
 {
   "name": "quantplay",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Read your Indian broker accounts in plain English: positions, holdings, orders, margins, P&L, option chains and market data, across 10+ brokers from one connection.",
   "author": {
     "name": "Quantplay",
     "email": "hello@quantplay.tech",
     "url": "https://quantplay.tech"
   },
-  "homepage": "https://quantplay.tech/mcp",
+  "homepage": "https://quantplay.tech/blog/quantplay-mcp-server",
   "repository": "https://github.com/quantplay/skills",
   "license": "MIT",
   "keywords": [

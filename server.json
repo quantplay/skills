@@ -3,8 +3,8 @@
   "name": "tech.quantplay/quantplay",
   "title": "Quantplay",
   "description": "Indian broker accounts for AI agents: positions, holdings, orders, P&L, option chains, 10+ brokers.",
-  "version": "0.1.0",
-  "websiteUrl": "https://quantplay.tech/mcp",
+  "version": "0.1.1",
+  "websiteUrl": "https://quantplay.tech/blog/quantplay-mcp-server",
   "repository": {
     "url": "https://github.com/quantplay/skills",
     "source": "github"

@@ -25,7 +25,7 @@ Listing copy for both portals is in [LISTING.md](LISTING.md).
 
 - [ ] Backbone with `/mcp/readonly` and tool annotations deployed
 - [ ] Privacy policy covering agent access live at quantplay.tech/policies/privacy
-- [ ] Docs page live at quantplay.tech/mcp
+- [ ] Docs page live at quantplay.tech/blog/quantplay-mcp-server
 - [ ] Reviewer test account: populated, no 2FA, a broker connected with sample holdings
 - [ ] OpenAI organization verified
 - [ ] Icon (assets/icon.png), support contact, 4 example prompts (in .codex-plugin/plugin.json)

@@ -35,7 +35,7 @@ and the ChatGPT plugin submission. Limits are the portal's; character counts are
 
 **Categories:** Finance · Productivity
 
-**Documentation URL:** `https://quantplay.tech/mcp`
+**Documentation URL:** `https://quantplay.tech/blog/quantplay-mcp-server`
 **Privacy policy URL:** `https://quantplay.tech/policies/privacy`
 **Support contact:** `hello@quantplay.tech`
 **Icon:** `assets/icon.png`

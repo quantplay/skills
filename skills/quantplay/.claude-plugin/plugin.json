@@ -2,17 +2,17 @@
   "name": "quantplay",
   "displayName": "Quantplay",
   "description": "Read your Indian broker accounts in plain English: positions, holdings, orders, margins, P&L, option chains and market data across 10+ brokers",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "Quantplay",
     "url": "https://quantplay.tech"
   },
-  "homepage": "https://quantplay.tech/mcp",
+  "homepage": "https://quantplay.tech/blog/quantplay-mcp-server",
   "repository": "https://github.com/quantplay/skills",
   "license": "MIT",
   "skills": "./",
   "icon": "./assets/icon.png",
-  "documentationUrl": "https://quantplay.tech/mcp",
+  "documentationUrl": "https://quantplay.tech/blog/quantplay-mcp-server",
   "supportUrl": "https://quantplay.tech/support",
   "privacyPolicyUrl": "https://quantplay.tech/policies/privacy",
   "termsOfServiceUrl": "https://quantplay.tech/policies/terms"

@@ -1,6 +1,6 @@
 ---
 name: quantplay
-version: 0.1.0
+version: 0.1.1
 description: >
   Read a user's Indian broker accounts through Quantplay: positions, holdings, orders,
   margins, P&L history, option chains, expiries and live market data, across 10+ brokers
