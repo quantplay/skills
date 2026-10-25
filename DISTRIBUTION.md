@@ -7,7 +7,7 @@ Where Quantplay is listed for AI agents. Update a row the day its status changes
 | Claude Connectors Directory | `claude.ai/directory/manage` → MCP connector, URL `/mcp/readonly` | Not submitted |
 | Claude plugin directory | same portal → plugin, this repo | Not submitted |
 | ChatGPT plugin directory | OpenAI Platform dashboard (org must be verified) | Not submitted |
-| Official MCP Registry | `mcp-publisher publish` with `server.json`, DNS auth on quantplay.tech | Not submitted |
+| Official MCP Registry | `mcp-publisher publish` with `server.json`, DNS auth on quantplay.tech | Live 2026-10-25 as `tech.quantplay/quantplay` v1.0.1 (read-only first) |
 | Claude Code marketplace | `claude plugin marketplace add quantplay/skills` | Live once merged to main |
 
 ## Why the listing is read-only
