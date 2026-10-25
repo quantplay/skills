@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const read = (p) => readFileSync(p, "utf8");
@@ -13,7 +13,7 @@ test("every manifest carries the same version", () => {
     marketplace: json(".claude-plugin/marketplace.json").plugins[0].version,
     codex: json(".codex-plugin/plugin.json").version,
     cursor: json(".cursor-plugin/plugin.json").version,
-    claudePlugin: json("skills/quantplay/.claude-plugin/plugin.json").version,
+    claudePlugin: json(".claude-plugin/plugin.json").version,
     server: json("server.json").version,
     skill: skillVersion,
   };
@@ -21,7 +21,7 @@ test("every manifest carries the same version", () => {
 });
 
 test("the plugin points at the read-only endpoint, which the directories require", () => {
-  assert.equal(json("skills/quantplay/.mcp.json").mcpServers.quantplay.url, READONLY);
+  assert.deepEqual(json(".mcp.json").mcpServers.quantplay, { type: "http", url: READONLY });
   assert.equal(json("server.json").remotes[0].url, READONLY);
 });
 
@@ -57,8 +57,7 @@ test("the Codex manifest declares its bundled read-only MCP connection", () => {
   assert.equal(manifest.mcpServers, "./.mcp.json");
   const config = json(manifest.mcpServers);
   assert.deepEqual(Object.keys(config.mcpServers), ["quantplay"]);
-  assert.equal(config.mcpServers.quantplay.url, READONLY);
-  assert.deepEqual(Object.keys(config.mcpServers.quantplay), ["url"]);
+  assert.deepEqual(config.mcpServers.quantplay, { type: "http", url: READONLY });
 });
 
 test("starter prompts satisfy public directory limits", () => {
@@ -69,5 +68,22 @@ test("starter prompts satisfy public directory limits", () => {
   for (const prompt of prompts) {
     assert.ok(typeof prompt === "string" && prompt.trim().length > 0 && prompt.length <= 128);
     assert.ok(!/[\r\n]/.test(prompt));
+  }
+});
+
+test("the Claude marketplace serves the repo root as the plugin", () => {
+  const entry = json(".claude-plugin/marketplace.json").plugins[0];
+  assert.equal(entry.source, "./");
+  assert.equal(entry.name, json(".claude-plugin/plugin.json").name);
+});
+
+test("skill folders hold only the skill, so skills.sh and ClawHub publish them as skills", () => {
+  for (const name of readdirSync("skills")) {
+    const dir = join("skills", name);
+    assert.ok(existsSync(join(dir, "SKILL.md")), `${dir} has no SKILL.md`);
+    assert.equal(/^name:\s*(\S+)/m.exec(read(join(dir, "SKILL.md")))[1], name);
+    for (const f of [".claude-plugin", ".codex-plugin", ".cursor-plugin", "openclaw.plugin.json"]) {
+      assert.ok(!existsSync(join(dir, f)), `${dir}/${f} makes registries treat the skill as a plugin`);
+    }
   }
 });

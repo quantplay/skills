@@ -38,6 +38,17 @@ claude plugin marketplace add quantplay/skills
 claude plugin install quantplay@quantplay-skills
 ```
 
+Inside a session, the same is `/plugin marketplace add quantplay/skills` then
+`/plugin install quantplay@quantplay-skills`. The plugin bundles the skill and the read-only server.
+
+**Any agent that reads skills (skills.sh)**
+
+```
+npx skills add quantplay/skills
+```
+
+This installs the skill only; add the MCP server above to your agent as well.
+
 ## Risk limits
 
 Stoploss, target and kill switch are set per broker account in Quantplay, and Quantplay auto-exits
