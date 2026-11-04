@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "name": "quantplay",
+  "displayName": "Quantplay",
+  "version": "1.0.1",
+  "description": "Read your Indian broker accounts in plain English: positions, holdings, orders, margins, P&L, option chains and market data across 10+ brokers, through Quantplay's hosted read-only MCP server.",
+  "compat": {
+    "source": "native",
+    "manifestDir": ".muse-plugin"
+  },
+  "capabilities": {
+    "skills": [
+      {
+        "id": "quantplay",
+        "path": "skills/quantplay/SKILL.md"
+      }
+    ],
+    "commands": [],
+    "hooks": [],
+    "mcpServers": [
+      {
+        "id": "quantplay",
+        "transport": "http",
+        "url": "https://mcp.quantplay.tech/mcp/readonly"
+      }
+    ],
+    "reminders": []
+  }
+}
