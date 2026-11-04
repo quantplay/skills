@@ -10,6 +10,7 @@ Where Quantplay is listed for AI agents. Update a row the day its status changes
 | Official MCP Registry | `mcp-publisher publish` with `server.json`, DNS auth on quantplay.tech | Live 2026-10-25 as `tech.quantplay/quantplay` v1.0.1 (read-only first) |
 | Claude Code marketplace | `claude plugin marketplace add quantplay/skills`, plugin root is the repo root | Live once merged to main |
 | skills.sh | `npx skills add quantplay/skills` reads `skills/quantplay/SKILL.md`; the page appears after installs are recorded | Installable 2026-10-25, no page yet |
+| Grok Build plugin marketplace | PR to `xai-org/plugin-marketplace` adding one entry to `.grok-plugin/marketplace.json`, pinned to a full commit SHA of this repo. Grok installs the whole repo: `.grok-plugin/plugin.json`, `skills/*/SKILL.md` and the root `.mcp.json`. To ship an update, bump the `sha` in that entry and rerun their `scripts/generate-plugin-index.py`; never open a second entry | Not submitted |
 | ClawHub | `clawhub skill publish skills/quantplay --slug quantplay --version 1.0.1` after `clawhub login` | Not published (`quantplay` slug free 2026-10-25) |
 
 ## Why the listing is read-only

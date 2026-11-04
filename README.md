@@ -16,8 +16,8 @@ and no key to paste: the first call opens Quantplay so you can sign in and appro
 
 | Endpoint | Tools | Use |
 |---|---|---|
-| `https://mcp.quantplay.tech/mcp/readonly` | 17 read-only tools | Directory listings and this plugin |
-| `https://mcp.quantplay.tech/mcp` | All 24, including orders | Add it yourself as a custom connector if you want the agent to trade |
+| `https://mcp.quantplay.tech/mcp/readonly` | 18 read-only tools | Directory listings and this plugin |
+| `https://mcp.quantplay.tech/mcp` | All 26, including orders | Add it yourself as a custom connector if you want the agent to trade |
 
 Every tool is annotated (`readOnlyHint`, `destructiveHint`, `openWorldHint`). On the full endpoint
 you choose per agent whether it may trade or change risk limits, and you can disconnect any agent
@@ -48,6 +48,12 @@ npx skills add quantplay/skills
 ```
 
 This installs the skill only; add the MCP server above to your agent as well.
+
+**Grok Build**
+
+Type `/marketplace` in Grok Build, find **Quantplay** and press `i`. This installs the whole repo
+as one plugin: the skill and the read-only server from [`.mcp.json`](.mcp.json). Sign in with your
+Quantplay account on first connect.
 
 ## Risk limits
 

@@ -13,6 +13,7 @@ test("every manifest carries the same version", () => {
     marketplace: json(".claude-plugin/marketplace.json").plugins[0].version,
     codex: json(".codex-plugin/plugin.json").version,
     cursor: json(".cursor-plugin/plugin.json").version,
+    grok: json(".grok-plugin/plugin.json").version,
     claudePlugin: json(".claude-plugin/plugin.json").version,
     server: json("server.json").version,
     skill: skillVersion,
@@ -82,7 +83,7 @@ test("skill folders hold only the skill, so skills.sh and ClawHub publish them a
     const dir = join("skills", name);
     assert.ok(existsSync(join(dir, "SKILL.md")), `${dir} has no SKILL.md`);
     assert.equal(/^name:\s*(\S+)/m.exec(read(join(dir, "SKILL.md")))[1], name);
-    for (const f of [".claude-plugin", ".codex-plugin", ".cursor-plugin", "openclaw.plugin.json"]) {
+    for (const f of [".claude-plugin", ".codex-plugin", ".cursor-plugin", ".grok-plugin", "openclaw.plugin.json"]) {
       assert.ok(!existsSync(join(dir, f)), `${dir}/${f} makes registries treat the skill as a plugin`);
     }
   }
