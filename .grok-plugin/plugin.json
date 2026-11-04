@@ -1,0 +1,19 @@
+{
+  "name": "quantplay",
+  "version": "1.0.1",
+  "description": "Read your Indian broker accounts in plain English: positions, holdings, orders, margins, P&L, option chains and market data across 10+ brokers, through Quantplay's hosted read-only MCP server. It cannot place, modify, cancel or square off orders. Sign in with your Quantplay account on first connect.",
+  "author": {
+    "name": "Quantplay",
+    "email": "hello@quantplay.tech",
+    "url": "https://quantplay.tech"
+  },
+  "homepage": "https://quantplay.tech/blog/quantplay-mcp-server",
+  "repository": "https://github.com/quantplay/skills",
+  "license": "MIT",
+  "keywords": [
+    "quantplay",
+    "quantplay mcp",
+    "quantplay broker"
+  ],
+  "logo": "assets/icon.png"
+}
