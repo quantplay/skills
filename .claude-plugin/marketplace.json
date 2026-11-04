@@ -5,14 +5,11 @@
     "email": "hello@quantplay.tech"
   },
   "description": "Official Quantplay plugin for AI agents: talk to your Indian broker accounts",
-  "metadata": {
-    "pluginRoot": "./skills"
-  },
   "plugins": [
     {
       "name": "quantplay",
-      "source": "./skills/quantplay",
-      "version": "0.1.1",
+      "source": "./",
+      "version": "1.0.1",
       "description": "Read your Indian broker accounts in plain English: positions, holdings, orders, margins, P&L, option chains and market data across 10+ brokers",
       "author": {
         "name": "Quantplay",

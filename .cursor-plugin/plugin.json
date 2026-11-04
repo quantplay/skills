@@ -1,6 +1,6 @@
 {
   "name": "quantplay",
-  "version": "0.1.1",
+  "version": "1.0.1",
   "description": "Read your Indian broker accounts in plain English: positions, holdings, orders, margins, P&L, option chains and market data, across 10+ brokers from one connection.",
   "author": {
     "name": "Quantplay",
