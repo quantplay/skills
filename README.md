@@ -49,6 +49,17 @@ npx skills add quantplay/skills
 
 This installs the skill only; add the MCP server above to your agent as well.
 
+**Muse Code**
+
+```
+muse plugins marketplace add quantplay https://github.com/quantplay/skills
+muse plugins install quantplay@quantplay
+muse plugins approve quantplay
+```
+
+This installs the skill and the read-only server. Muse holds a third-party plugin's MCP server for
+review until you approve it; sign in with your Quantplay account on first connect.
+
 **Grok Build**
 
 Type `/marketplace` in Grok Build, find **Quantplay** and press `i`. This installs the whole repo
