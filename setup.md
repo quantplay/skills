@@ -18,6 +18,7 @@ Use the read-only URL unless the user explicitly asks to trade through you.
 | Claude Code | `claude mcp add --transport http quantplay https://mcp.quantplay.tech/mcp/readonly` then `/mcp` → quantplay → Authenticate |
 | Codex | `codex mcp add quantplay --url https://mcp.quantplay.tech/mcp/readonly` then `codex mcp login quantplay` |
 | Cursor | Add `{"mcpServers": {"quantplay": {"url": "https://mcp.quantplay.tech/mcp/readonly"}}}` to `~/.cursor/mcp.json` |
+| Muse Code | `muse plugins marketplace add quantplay https://github.com/quantplay/skills`, then `muse plugins install quantplay@quantplay` and `muse plugins approve quantplay`. This installs the skill and the read-only server |
 
 ## 2. Sign in
 
