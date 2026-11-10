@@ -10,4 +10,108 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm test
+      # The checks live here, not in a .js file: the Claude directory refuses any
+      # script in the plugin from an unverified organization.
+      - name: Manifest checks
+        run: |
+          cat > "$RUNNER_TEMP/manifests.test.mjs" <<'EOF'
+          import { test } from "node:test";
+          import assert from "node:assert/strict";
+          import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
+          import { join } from "node:path";
+
+          const read = (p) => readFileSync(p, "utf8");
+          const json = (p) => JSON.parse(read(p));
+          const READONLY = "https://mcp.quantplay.tech/mcp/readonly";
+
+          test("every manifest carries the same version", () => {
+            const skillVersion = /^version:\s*(\S+)/m.exec(read("skills/quantplay/SKILL.md"))[1];
+            const versions = {
+              marketplace: json(".claude-plugin/marketplace.json").plugins[0].version,
+              codex: json(".codex-plugin/plugin.json").version,
+              cursor: json(".cursor-plugin/plugin.json").version,
+              grok: json(".grok-plugin/plugin.json").version,
+              muse: json(".muse-plugin/plugin.json").version,
+              claudePlugin: json(".claude-plugin/plugin.json").version,
+              server: json("server.json").version,
+              skill: skillVersion,
+            };
+            assert.equal(new Set(Object.values(versions)).size, 1, JSON.stringify(versions));
+          });
+
+          test("the plugin points at the read-only endpoint, which the directories require", () => {
+            assert.deepEqual(json(".mcp.json").mcpServers.quantplay, { type: "http", url: READONLY });
+            assert.equal(json("server.json").remotes[0].url, READONLY);
+          });
+
+          test("the codex listing declares read-only capability and example prompts", () => {
+            const i = json(".codex-plugin/plugin.json").interface;
+            assert.deepEqual(i.capabilities, ["Read"]);
+            assert.ok(i.defaultPrompt.length >= 3);
+            assert.ok(statSync(i.logo.replace("./", "")).size > 0);
+          });
+
+          const walk = (dir) => readdirSync(dir).flatMap((f) => {
+            const p = join(dir, f);
+            if ([".git", "node_modules"].includes(f)) return [];
+            return statSync(p).isDirectory() ? walk(p) : [p];
+          });
+
+          test("no secrets or overclaims in a public repo", () => {
+            const banned = [
+              [/X-Api-Key:\s*[A-Za-z0-9_-]{20,}/, "an API key value"],
+              [/AKIA[0-9A-Z]{16}/, "an AWS access key"],
+              [/QUANTPLAY_API_KEY=/, "a key in a URL"],
+              [/blocks? (new )?orders?/i, "risk limits auto-exit, they don't block"],
+              [/\b14 brokers\b/i, "say 10+ brokers"],
+            ];
+            for (const f of walk(".").filter((p) => /\.(md|json|js)$/.test(p))) {
+              const text = read(f);
+              for (const [re, why] of banned) assert.ok(!re.test(text), `${f}: ${why}`);
+            }
+          });
+
+          test("the Codex manifest declares its bundled read-only MCP connection", () => {
+            const manifest = json(".codex-plugin/plugin.json");
+            assert.equal(manifest.mcpServers, "./.mcp.json");
+            const config = json(manifest.mcpServers);
+            assert.deepEqual(Object.keys(config.mcpServers), ["quantplay"]);
+            assert.deepEqual(config.mcpServers.quantplay, { type: "http", url: READONLY });
+          });
+
+          test("starter prompts satisfy public directory limits", () => {
+            const prompts = json(".codex-plugin/plugin.json").interface.defaultPrompt;
+            assert.ok(Array.isArray(prompts));
+            assert.ok(prompts.length >= 1 && prompts.length <= 3, "Public listings allow at most three starter prompts");
+            assert.equal(new Set(prompts.map((p) => p.trim().replace(/\s+/g, " "))).size, prompts.length);
+            for (const prompt of prompts) {
+              assert.ok(typeof prompt === "string" && prompt.trim().length > 0 && prompt.length <= 128);
+              assert.ok(!/[\r\n]/.test(prompt));
+            }
+          });
+
+          test("the Claude marketplace serves the repo root as the plugin", () => {
+            const entry = json(".claude-plugin/marketplace.json").plugins[0];
+            assert.equal(entry.source, "./");
+            assert.equal(entry.name, json(".claude-plugin/plugin.json").name);
+          });
+
+          test("skill folders hold only the skill, so skills.sh and ClawHub publish them as skills", () => {
+            for (const name of readdirSync("skills")) {
+              const dir = join("skills", name);
+              assert.ok(existsSync(join(dir, "SKILL.md")), `${dir} has no SKILL.md`);
+              assert.equal(/^name:\s*(\S+)/m.exec(read(join(dir, "SKILL.md")))[1], name);
+              for (const f of [".claude-plugin", ".codex-plugin", ".cursor-plugin", ".grok-plugin", ".muse-plugin", "openclaw.plugin.json"]) {
+                assert.ok(!existsSync(join(dir, f)), `${dir}/${f} makes registries treat the skill as a plugin`);
+              }
+            }
+          });
+
+          test("the Muse manifest ships the skill and only the read-only server", () => {
+            // Muse rejects the http server in .mcp.json and reads this manifest first.
+            const caps = json(".muse-plugin/plugin.json").capabilities;
+            assert.deepEqual(caps.mcpServers, [{ id: "quantplay", transport: "http", url: READONLY }]);
+            assert.deepEqual(caps.skills, [{ id: "quantplay", path: "skills/quantplay/SKILL.md" }]);
+          });
+          EOF
+          node --test "$RUNNER_TEMP/manifests.test.mjs"
